@@ -1,0 +1,32 @@
+class RomanNumerals:
+
+    def to_roman(val):
+        num = [1,4,5,9,10,40,50,90,100,400,500,900,1000]
+        sym = ['I','IV','V','IX','X','XL','L','XC','C','CD','D','CM','M']
+        i = 12
+        vysledok = ''
+        
+        while val:
+            div = val // num[i]
+            val %= num[i]
+            
+            while div:
+                vysledok += sym[i]
+                div-=1
+            i-=1
+        return vysledok
+
+    def from_roman(roman_num):
+        roman_dict = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+        vysledok = 0
+        roman = roman_num[::-1]
+        right_value = roman_dict[roman[0]]
+        for cislo in roman:
+            left_value = roman_dict[cislo]
+            if left_value < right_value:
+                vysledok -= left_value
+            else:
+                vysledok+=left_value
+            right_value = left_value
+            
+        return vysledok
